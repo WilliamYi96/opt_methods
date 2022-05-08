@@ -27,11 +27,13 @@ class Trace:
         self.its_converted_to_epochs = False
         self.ls_its = None
     
-    def compute_loss_of_iterates(self):
+    def compute_loss_of_iterates(self, return_loss_vals=False):
         if len(self.loss_vals) == 0:
             self.loss_vals = np.asarray([self.loss.value(x) for x in self.xs])
         else:
             warnings.warn('Loss values have already been computed. Set .loss_vals = [] to recompute.')
+        if return_loss_vals:
+            return self.loss_vals
     
     def convert_its_to_epochs(self, batch_size=1):
         if self.its_converted_to_epochs:
